@@ -1,0 +1,2 @@
+git rm -r --cached backend-dotnet/balta-data-access/BaltaDataAccess/bin
+git rm -r --cached backend-dotnet/balta-data-access/BaltaDataAccess/obj
