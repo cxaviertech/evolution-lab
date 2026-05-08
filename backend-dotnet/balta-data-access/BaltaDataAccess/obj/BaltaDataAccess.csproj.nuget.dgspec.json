@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\workspace\\BaltaDataAccess\\BaltaDataAccess.csproj": {}
+    "C:\\workspace\\evolution-lab\\backend-dotnet\\balta-data-access\\BaltaDataAccess\\BaltaDataAccess.csproj": {}
   },
   "projects": {
-    "C:\\workspace\\BaltaDataAccess\\BaltaDataAccess.csproj": {
+    "C:\\workspace\\evolution-lab\\backend-dotnet\\balta-data-access\\BaltaDataAccess\\BaltaDataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\workspace\\BaltaDataAccess\\BaltaDataAccess.csproj",
+        "projectUniqueName": "C:\\workspace\\evolution-lab\\backend-dotnet\\balta-data-access\\BaltaDataAccess\\BaltaDataAccess.csproj",
         "projectName": "BaltaDataAccess",
-        "projectPath": "C:\\workspace\\BaltaDataAccess\\BaltaDataAccess.csproj",
+        "projectPath": "C:\\workspace\\evolution-lab\\backend-dotnet\\balta-data-access\\BaltaDataAccess\\BaltaDataAccess.csproj",
         "packagesPath": "C:\\Users\\cxdos\\.nuget\\packages\\",
-        "outputPath": "C:\\workspace\\BaltaDataAccess\\obj\\",
+        "outputPath": "C:\\workspace\\evolution-lab\\backend-dotnet\\balta-data-access\\BaltaDataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
