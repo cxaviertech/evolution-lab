@@ -30,7 +30,8 @@ namespace BaltaDataAccess
                     // ExecuteScarlar(connection);
                     // ReadView(connection);
                     // OneToOne(connection);
-                    OneToMany(connection);
+                    // OneToMany(connection);
+                    QueryMultiple(connection);
                 }
             }
 
@@ -282,7 +283,7 @@ namespace BaltaDataAccess
                     [CareerItem] ON [CareerItem].[CareerId] = [Career].[Id]
                 ORDER BY [Career].[Title]";
 
-            var careers = new List<Career>();            
+            var careers = new List<Career>();
             var items = connection.Query<Career, CareerItem, Career>(
                 sql,
                 (career, item) =>
@@ -295,7 +296,8 @@ namespace BaltaDataAccess
                         car.Items.Add(item);
                         careers.Add(car);
                     }
-                    else{
+                    else
+                    {
                         car.Items.Add(item);
                     }
                     return career;
@@ -311,7 +313,27 @@ namespace BaltaDataAccess
             }
         }
 
+        static void QueryMultiple(SqlConnection connection)
+        {
+            var sql = "SELECT * FROM [Category]; SELECT * FROM [Course]";
+            using (var multi = connection.QueryMultiple(sql))
+            {
+                var categories = multi.Read<Category>().ToList();
+                var courses = multi.Read<Course>().ToList();
 
+                Console.WriteLine("Categorias:");
+                foreach (var item in categories)
+                {
+                    Console.WriteLine($"{item.Id} - {item.Title}");
+                }
 
+                Console.WriteLine("Cursos:");
+                foreach (var item in courses)
+                {
+                    Console.WriteLine($"{item.Id} - {item.Title}");
+                }
+            }
+
+        }
     }
 }
