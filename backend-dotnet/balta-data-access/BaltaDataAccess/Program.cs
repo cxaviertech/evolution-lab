@@ -32,7 +32,8 @@ namespace BaltaDataAccess
                     // OneToOne(connection);
                     // OneToMany(connection);
                     // QueryMultiple(connection);
-                    SelectIn(connection);
+                    // SelectIn(connection);
+                    Like(connection, "backend");
                 }
             }
 
@@ -358,6 +359,20 @@ namespace BaltaDataAccess
             {
                 Console.WriteLine($"{item.Id} - {item.Title}");
             }
+        }
+
+        static void Like(SqlConnection connection, string term = "api")
+        {
+            var sql = "SELECT * FROM [Course] WHERE [Title] LIKE @exp";
+            var courses = connection.Query<Course>(sql, new
+            {
+                exp = $"%{term}%" // % texto = termina com | texto % = começa com | % texto % = contém
+            });
+
+            foreach (var item in courses)
+            {
+                Console.WriteLine($"{item.Id} - {item.Title}");
+            };
         }
     }
 }
