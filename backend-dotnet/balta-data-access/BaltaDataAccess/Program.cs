@@ -33,7 +33,8 @@ namespace BaltaDataAccess
                     // OneToMany(connection);
                     // QueryMultiple(connection);
                     // SelectIn(connection);
-                    Like(connection, "backend");
+                    // Like(connection, "backend");
+                    Transaction(connection);
                 }
             }
 
@@ -114,7 +115,7 @@ namespace BaltaDataAccess
             var deleteQuery = "DELETE [Category] WHERE [Id]=@id";
             var rows = connection.Execute(deleteQuery, new
             {
-                id = new Guid("231570fb-ff4c-4281-bbfa-2916000f247e"),
+                id = new Guid("e0f4f180-4dda-4408-94f8-d7ffddd730e0"),
             });
 
             Console.WriteLine($"{rows} registros excluídos");
@@ -373,6 +374,49 @@ namespace BaltaDataAccess
             {
                 Console.WriteLine($"{item.Id} - {item.Title}");
             };
+        }
+    
+        static void Transaction(SqlConnection connection)
+        {
+            var category = new Category();
+            category.Id = Guid.NewGuid();
+            category.Title = "TEste Transação Nao Salvar 2";
+            category.Url = "amazon";
+            category.Summary = "AWS Cloud";
+            category.Order = 8;
+            category.Description = "Catregoria destinada a serviços do AWS";
+            category.Featured = false;
+
+            //SQL Injection                
+            var insertSql = @"INSERT INTO 
+                                [Category] 
+                                VALUES (
+                                    @Id,
+                                    @Title, 
+                                    @Url, 
+                                    @Summary, 
+                                    @Order, 
+                                    @Description, 
+                                    @Featured)";
+
+            using (var transaction = connection.BeginTransaction())
+            {
+                var rows = connection.Execute(insertSql, new
+                {
+                    category.Id,
+                    category.Title,
+                    category.Url,
+                    category.Summary,
+                    category.Order,
+                    category.Description,
+                    category.Featured
+                }, transaction);
+
+                // transaction.Commit(); // Salva Tabela inserida no BD // Se nao chama o Commit, a transação é desfeita, ou seja, não salva a tabela inserida no BD
+                transaction.Rollback(); // Desfaz a inserção, ou seja, não salva a tabela inserida no BD
+
+                Console.WriteLine($"{rows} linha(s) inserida(s)");
+            }
         }
     }
 }
