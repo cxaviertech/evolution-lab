@@ -1,3 +1,2 @@
-# Ignorar bin e obj
-backend-dotnet/balta-data-access/BaltaDataAccess/bin/
-backend-dotnet/balta-data-access/BaltaDataAccess/obj/
+bin/
+obj/

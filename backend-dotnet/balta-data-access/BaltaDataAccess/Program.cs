@@ -31,7 +31,8 @@ namespace BaltaDataAccess
                     // ReadView(connection);
                     // OneToOne(connection);
                     // OneToMany(connection);
-                    QueryMultiple(connection);
+                    // QueryMultiple(connection);
+                    SelectIn(connection);
                 }
             }
 
@@ -334,6 +335,29 @@ namespace BaltaDataAccess
                 }
             }
 
+        }
+
+        static void SelectIn(SqlConnection connection)
+        {
+            var sql = "SELECT * FROM [Category] WHERE [Id] IN @Ids";
+            var categories = connection.Query<Category>(sql, new
+            {
+                Ids = new[]
+                {
+                    new Guid("af3407aa-11ae-4621-a2ef-2028b85507c4"),
+                    new Guid("231570fb-ff4c-4281-bbfa-2916000f247e"),
+                    new Guid("af3407aa-11ae-4621-a2ef-2028b85507c4"),
+                    new Guid("09ce0b7b-cfca-497b-92c0-3290ad9d5142"),
+                    new Guid("6cd9ba03-5521-43fa-8275-553fd5ca042a"),
+                    new Guid("a0b54cfe-2fd5-4b0c-89aa-73ee38273c6d"),
+                    new Guid("25d510c8-3108-44c2-86c5-924d9832aa8c")
+                }
+            });
+
+            foreach (var item in categories)
+            {
+                Console.WriteLine($"{item.Id} - {item.Title}");
+            }
         }
     }
 }
